@@ -5,12 +5,12 @@
 
 #include "TransLtRus.h"
 
-int main()
+int main(int argc, char* argv[])
 {
 	//Русская локализация в консоли
 	setlocale(LC_ALL, "Russian");
-	string str = "uuuuu'jjjj''wd";
-	cout << trStr(str);
+	return 0;
+
 }
 
 string trStr(string str)
@@ -68,7 +68,7 @@ string trWord(string word)
 
 string findInWordList(string word)
 {
-	string fileName = "wordList.txt";//Название файла словаря
+	string fileName = "C:\\Users\\Admin\\source\\repos\\TransLtRus\\TransLtRus\\wordList.txt";//Название файла словаря
 	string str;//промежуточная строка для считывания словаря из файла
 	map <string, string> wordList;//Словарь
 	ifstream file;//Входной файл словаря
@@ -146,11 +146,11 @@ string trunSymbol(string symbol)
 
 bool checkWord(string word)
 {
-	string posl[14] = {"Zh", "zh","Ch", "ch", "Sh", "sh", "Shch", "shch", "Ia", "ia", "Iu", "iu", "Ie", "ie"};
+	string posl[15] = {"Zh", "zh","Ch", "ch", "Sh", "sh", "Shch", "shch", "Ia", "ia", "Iu", "iu", "Ie", "ie", "\'\'"};
 	bool res = false;
 	for (int i = 0; i < 14; i++)
 	{
-		if (word.find(posl[i])==0)
+		if (word.find(posl[i])<word.length())
 		{
 			res = true;
 		}
