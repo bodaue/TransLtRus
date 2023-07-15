@@ -15,8 +15,9 @@ int main()
 
 string trStr(string str)
 {
-	string stRus;
+	string stRus;//Результирующая строка
 
+	//Пока не расмотрен каждый символ
 	for (int i = 0; i < str.length(); i++)
 	{
 		//Проверка условия, что текущий символ не является буквой(началом слова)
@@ -37,6 +38,7 @@ string trStr(string str)
 			
 			if (checkWord(str.substr(begin, i - begin)))
 			{
+				//Выполнить поиск в словаре и записать его в результирующую строку
 				stRus += findInWordList(str.substr(begin, i - begin));
 			}
 			else
@@ -50,6 +52,7 @@ string trStr(string str)
 		}
 	}
 
+	//Вернуть результирующую строку
 	return stRus;
 }
 
