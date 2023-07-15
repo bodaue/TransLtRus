@@ -9,8 +9,62 @@ int main(int argc, char* argv[])
 {
 	//Русская локализация в консоли
 	setlocale(LC_ALL, "Russian");
-	return 0;
 
+	//Входной файл
+	ifstream file(argv[1]);
+
+	//Исходный текст
+	vector <string> text;
+	vector <string>textKirill;//выходной тексты
+	string str;//Пустая строка для предварительной записи из файла
+	int countNotEmptyString;//счётчик не пустых строк
+
+	//Проверка открылся ли входной файл
+	if (!file.is_open())
+	{
+		cout << "Файла не существует или неверно указан путь" << endl;
+	}
+	else
+	{
+		//Считываем содержимое файла
+		countNotEmptyString = 0;
+		while (getline(file, str))
+		{
+			if (!str.empty())
+				countNotEmptyString++;
+			text.push_back(str);
+		}
+
+		//Закрывваем файл
+		file.close();
+
+
+		//Проверяем что строки не пустые
+		if (countNotEmptyString == 0)
+		{
+			cout << "Все строки пустые!" << endl;
+		}
+		else
+		{
+			//Произвести построчную обратную транслитерацию текста
+			for (int i = 0; i < text.size(); i++)
+			{
+				textKirill.push_back(trStr(text[i]));
+			}
+
+			//Открыть или создать выходной вайл
+			ofstream fout(argv[2]);
+
+			//Записать результат обратной транслитерации в выходной файл
+			for (int i = 0; i < textKirill.size(); i++)
+			{
+				fout << textKirill[i] << endl;
+			}
+
+			//Закрыть выходной файл
+			fout.close();
+		}
+	}
 }
 
 string trStr(string str)
